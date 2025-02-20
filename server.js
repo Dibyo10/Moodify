@@ -5,12 +5,12 @@ const bodyParser = require('body-parser');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
-const port = process.env.PORT || 5002; // ✅ Ensure port matches Flutter
+const port = process.env.PORT || 5002; 
 
 app.use(cors());
 app.use(bodyParser.json());
 
-const genAI = new GoogleGenerativeAI(process.env.AI_API_KEY); // ✅ Fix API Key usage
+const genAI = new GoogleGenerativeAI(process.env.AI_API_KEY); 
 
 app.post('/chat', async (req, res) => {
   try {
