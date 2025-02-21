@@ -59,7 +59,7 @@ app.post('/chat', async (req, res) => {
       
       If a specific emotion is dominant (above 50%), address it directly.
       If multiple emotions are detected, recognize their combination and provide balanced support.
-      Maintain a friendly and understanding tone throughout.`;
+      Maintain a friendly and understanding tone throughout. Do mention the numerical percentage of the emotions that is mentioned.`;
 
       const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
       const result = await model.generateContent(prompt);
