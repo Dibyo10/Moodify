@@ -47,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:5002/chat'), 
+        Uri.parse('http://10.0.2.2:5002/chat'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'message': text}),
       );
@@ -85,24 +85,67 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lily', style: TextStyle(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        backgroundColor: Colors.purple,
-        foregroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.deepPurple, Colors.purpleAccent],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Icon(Icons.person, color: Colors.purpleAccent),
+            ),
+            SizedBox(width: 10),
+            Text(
+              'Lily',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+          ],
+        ),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.settings, color: Colors.white),
+            onPressed: () {
+             
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.brightness_6, color: Colors.white),
+            onPressed: () {
+              
+            },
+          ),
+        ],
       ),
-      body: Chat(
-        messages: _messages,
-        onSendPressed: (partialText) => _sendMessage(partialText.text),
-        user: _user,
-        theme: DefaultChatTheme(
-          inputBackgroundColor: Colors.purple,
-          inputTextColor: Colors.white,
-          primaryColor: Colors.purpleAccent,
-          secondaryColor: Colors.grey.shade300,
-          backgroundColor: Colors.white,
-          sentMessageBodyTextStyle: TextStyle(color: Colors.white),
-          receivedMessageBodyTextStyle: TextStyle(color: Colors.black87),
-          messageInsetsVertical: 10,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.purple.shade50, Colors.purple.shade100],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Chat(
+          messages: _messages,
+          onSendPressed: (partialText) => _sendMessage(partialText.text),
+          user: _user,
+          theme: DefaultChatTheme(
+            inputBackgroundColor: Colors.purpleAccent,
+            inputTextColor: Colors.white,
+            primaryColor: Colors.deepPurpleAccent,
+            secondaryColor: Colors.purple.shade100,
+            backgroundColor: Colors.transparent,
+            sentMessageBodyTextStyle: TextStyle(color: Colors.white),
+            receivedMessageBodyTextStyle: TextStyle(color: Colors.black87),
+            messageInsetsVertical: 10,
+            messageBorderRadius: 20, 
+          ),
         ),
       ),
     );
