@@ -103,12 +103,14 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 10,
+        toolbarHeight: 70,
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: widget.isDarkMode
-                  ? [Colors.black87, Colors.black54]
-                  : [Colors.deepPurple, Colors.purpleAccent],
+                  ? [Colors.deepPurple.shade900, Colors.black87] 
+                  : [Colors.deepPurple, Colors.purpleAccent], 
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -118,16 +120,32 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             CircleAvatar(
               backgroundColor: Colors.white,
+              radius: 20,
               child: Icon(Icons.person, color: Colors.purpleAccent),
             ),
             SizedBox(width: 10),
-            Text(
-              'Lily',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Lily',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  "AI Chat Assistant",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-        centerTitle: false,
         actions: [
           IconButton(
             icon: Icon(Icons.settings, color: Colors.white),
@@ -154,11 +172,11 @@ class _ChatScreenState extends State<ChatScreen> {
           onSendPressed: (partialText) => _sendMessage(partialText.text),
           user: _user,
           theme: DefaultChatTheme(
-            inputBackgroundColor: widget.isDarkMode ? Colors.grey[800]! : Colors.purpleAccent,
+            inputBackgroundColor: widget.isDarkMode ? Colors.grey[850]! : Colors.purpleAccent,
             inputTextColor: Colors.white,
             primaryColor: widget.isDarkMode
-                ? Colors.deepPurple 
-                : Colors.deepPurpleAccent, 
+                ? Colors.deepPurpleAccent.shade700 
+                : Colors.deepPurpleAccent,
             secondaryColor: widget.isDarkMode
                 ? Colors.white 
                 : Colors.purple.shade100, 
