@@ -9,21 +9,39 @@ void main() {
   runApp(AIChatApp());
 }
 
-class AIChatApp extends StatelessWidget {
+class AIChatApp extends StatefulWidget {
+  @override
+  _AIChatAppState createState() => _AIChatAppState();
+}
+
+class _AIChatAppState extends State<AIChatApp> {
+  bool _isDarkMode = false;
+
+  void _toggleTheme() {
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
-        useMaterial3: true,
+      theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
+      home: ChatScreen(
+        isDarkMode: _isDarkMode,
+        onThemeToggle: _toggleTheme,
       ),
-      home: ChatScreen(),
     );
   }
 }
 
 class ChatScreen extends StatefulWidget {
+  final bool isDarkMode;
+  final VoidCallback onThemeToggle;
+
+  ChatScreen({required this.isDarkMode, required this.onThemeToggle});
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -88,7 +106,9 @@ class _ChatScreenState extends State<ChatScreen> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.deepPurple, Colors.purpleAccent],
+              colors: widget.isDarkMode
+                  ? [Colors.black87, Colors.black54]
+                  : [Colors.deepPurple, Colors.purpleAccent],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -111,22 +131,20 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: [
           IconButton(
             icon: Icon(Icons.settings, color: Colors.white),
-            onPressed: () {
-             
-            },
+            onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.brightness_6, color: Colors.white),
-            onPressed: () {
-              
-            },
+            icon: Icon(widget.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round, color: Colors.white),
+            onPressed: widget.onThemeToggle,
           ),
         ],
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.purple.shade50, Colors.purple.shade100],
+            colors: widget.isDarkMode
+                ? [Colors.black87, Colors.black54]
+                : [Colors.purple.shade50, Colors.purple.shade100],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -136,15 +154,19 @@ class _ChatScreenState extends State<ChatScreen> {
           onSendPressed: (partialText) => _sendMessage(partialText.text),
           user: _user,
           theme: DefaultChatTheme(
-            inputBackgroundColor: Colors.purpleAccent,
+            inputBackgroundColor: widget.isDarkMode ? Colors.grey[800]! : Colors.purpleAccent,
             inputTextColor: Colors.white,
-            primaryColor: Colors.deepPurpleAccent,
-            secondaryColor: Colors.purple.shade100,
+            primaryColor: widget.isDarkMode
+                ? Colors.deepPurple 
+                : Colors.deepPurpleAccent, 
+            secondaryColor: widget.isDarkMode
+                ? Colors.white 
+                : Colors.purple.shade100, 
             backgroundColor: Colors.transparent,
             sentMessageBodyTextStyle: TextStyle(color: Colors.white),
-            receivedMessageBodyTextStyle: TextStyle(color: Colors.black87),
+            receivedMessageBodyTextStyle: TextStyle(color: Colors.black),
             messageInsetsVertical: 10,
-            messageBorderRadius: 20, 
+            messageBorderRadius: 20,
           ),
         ),
       ),
