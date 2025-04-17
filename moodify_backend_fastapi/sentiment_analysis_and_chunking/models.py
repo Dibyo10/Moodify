@@ -11,5 +11,5 @@ class SentimentRecord(Base):
     user_id = Column(Integer, nullable=False)
     message = Column(String, nullable=False)
     sentiment_score = Column(Float, nullable=False)
-    vector_embedding = Column(Vector(1024), nullable=False)  # Assuming OpenAI's 1536-d embedding size
+    vector_embedding = Column(Vector(1024), nullable=False) 
     timestamp = Column(DateTime(timezone=True), server_default=func.now())
