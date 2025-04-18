@@ -12,10 +12,10 @@ nltk.download("punkt_tab")
 
 app = FastAPI()
 
-# Initialize database tables
+
 Base.metadata.create_all(bind=engine)
 
-# Include API routes
+
 app.include_router(sentiment_routes.router, prefix="/sentiments", tags=["Sentiments"])
 app.include_router(search_routes.router, prefix="/similar-sentiments", tags=["Similarity"])
 
