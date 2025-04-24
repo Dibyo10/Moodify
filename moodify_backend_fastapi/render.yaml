@@ -2,8 +2,8 @@ services:
   - type: web
     name: moodify-sentiment-api
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "uvicorn sentiment_analysis_and_chunking.main:app --host 0.0.0.0 --port 10000"
+    buildCommand: "pip install -r moodify_backend/requirements.txt"
+    startCommand: "uvicorn moodify_backend/sentiment_analysis_and_chunking.main:app --host 0.0.0.0 --port 10000"
     envVars:
       - key: DATABASE_URL
         value: DATABASE_URL
