@@ -9,3 +9,4 @@ services:
         value: DATABASE_URL
       - key: OPENAI_API_KEY
         value: OPENAI_API_KEY
+    root: moodify_backend
