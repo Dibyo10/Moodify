@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import text
-from app.database import SessionLocal
+from sentiment_analysis_and_chunking.database import SessionLocal
 
 router = APIRouter()
 
