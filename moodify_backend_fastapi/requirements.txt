@@ -6,3 +6,4 @@ pgvector
 openai
 pydantic
 python-dotenv
+transformers
