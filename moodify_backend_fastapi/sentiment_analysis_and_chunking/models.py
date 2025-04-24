@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.sql import func
 from pgvector.sqlalchemy import Vector
-from app.database import Base
+from sentiment_analysis_and_chunking.database import Base
 
 class SentimentRecord(Base):
     __tablename__ = "sentiments"
