@@ -15,13 +15,13 @@ def get_db():
 @router.get("/similar-sentiments/{id}")
 def get_similar_sentiments(id: int, db: Session = Depends(get_db), top_n: int = 5):
     query = text("""
-    SELECT id, user_id, chunk_text, sentiment_score, timestamp, 
+    SELECT id, user_id, message, sentiment_score, timestamp, 
         (vector_embedding <=> (SELECT vector_embedding FROM sentiments WHERE id = :id)) AS cosine_similarity
     FROM sentiments
     WHERE id != :id
     ORDER BY cosine_similarity ASC
     LIMIT :top_n;
-""")
+    """)
 
-    results = db.execute(query, {"id": id, "top_n": top_n}).fetchall()
-    return {"similar_sentiments": [dict(row) for row in results]}
+    results = db.execute(query, {"id": id, "top_n": top_n}).mappings().all()
+    return {"similar_sentiments": [row for row in results]}
