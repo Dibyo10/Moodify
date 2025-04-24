@@ -2,12 +2,12 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 import asyncio  # ✅ Needed to gather async calls
 
-from app.database import SessionLocal
-from app.models import SentimentRecord
-from app.schemas import SentimentCreate
-from app.services.embedding import get_embedding
-from app.services.sentiment import analyze_sentiment
-from app.utils.text_processing import message
+from sentiment_analysis_and_chunking.database import SessionLocal
+from sentiment_analysis_and_chunking.models import SentimentRecord
+from sentiment_analysis_and_chunking.schemas import SentimentCreate
+from sentiment_analysis_and_chunking.services.embedding import get_embedding
+from sentiment_analysis_and_chunking.services.sentiment import analyze_sentiment
+from sentiment_analysis_and_chunking.utils.text_processing import message
 
 router = APIRouter()
 
